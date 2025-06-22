@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <link rel="stylesheet" href="styles.css">
+
+  <title>Personal Portfolio</title>
+</head>
+
+<body class="home-page">
+  <header>
+    <a href="#" class="logo">Sunkissed</a>
+  
+    <!-- Desktop Navigation -->
+    <nav class="desktop-nav">
+      <div class="content">
+        <a href="#" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="projects.html">Projects</a>
+        <a href="experience.html">Experience</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+  
+    <!-- Hamburger Menu Button -->
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </header>
+  
+  <!-- Mobile Navigation Overlay -->
+  <div class="nav-overlay" id="navOverlay">
+    <button class="close-btn" id="closeBtn" aria-label="Close navigation menu">
+      <i class="fas fa-times"></i>
+    </button>
+    <nav class="mobile-nav">
+      <a href="#" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="experience.html">Experience</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+  
+  <!-- SECTION 1: HOME-->
+  <section class="home">
+    <div class="home-img">
+      <img src="/images/Website Headshot.webp" width=100%>
+    </div>
+
+    <div class="home-content">
+      <h1>Hi, I'm <span>Matthew</span></h1>
+      <h3>I'm a <span id ="typewriter" class="typing-text"></span></h3>
+      <p>I am a Senior at the University of Wisconsin-Madison pursuing a Bachelors in Computer Science and Data Science. I love finding creative solution to complex problems and turning data into meaningful insights.</p>
+      <div class="social-icons">
+        <a href="https://github.com/MatthewYu402" target="_blank"><i class="fa-brands fa-github"></i></a>
+        <a href="https://www.linkedin.com/in/matthew-yu-37b860222/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+        <a href="https://www.instagram.com/_matthew_yu_/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+        <a href="mailto:myu242@wisc.edu" target="_blank"><i class="fa-solid fa-envelope"></i></a>
+        <a href="https://open.spotify.com/user/matthewyu402" target="_blank"><i class="fa-brands fa-spotify"></i></a>
+      </div>
+    </div>
+  </section>
+  <script src="script.js"></script>
+
+  <footer>
+    <div class="footer-border"></div>
+    <p>Designed & Built by Matthew Yu © 2025</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <title>Personal Portfolio</title>
+</head>
+
+<body class="about-page">
+  <header>
+    <a href="#" class="logo">Sunkissed</a>
+  
+    <!-- Desktop Navigation -->
+    <nav class="desktop-nav">
+      <div class="content">
+        <a href="home.html">Home</a>
+        <a href="#" class="active">About</a>
+        <a href="skills.html">Skills</a>
+        <a href="projects.html">Projects</a>
+        <a href="experience.html">Experience</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </nav>
+  
+    <!-- Hamburger Menu Button -->
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+  </header>
+  
+  <!-- Mobile Navigation Overlay -->
+  <div class="nav-overlay" id="navOverlay">
+    <button class="close-btn" id="closeBtn" aria-label="Close navigation menu">
+      <i class="fas fa-times"></i>
+    </button>
+    <nav class="mobile-nav">
+      <a href="home.html">Home</a>
+      <a href="#" class="active">About</a>
+      <a href="skills.html">Skills</a>
+      <a href="projects.html">Projects</a>
+      <a href="experience.html">Experience</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+
+  <section class="about">
+    <div class="title-container">
+      <div class="image-container">
+        <h2>About Me</h2>
+        <div class="about-img">
+          <img src="/images/about-me-photo.webp" width="100%">
+        </div>
+        <p>Sika Deer in Nara Park, Japan</p>
+      </div>
+      <div class="about-description">
+        <p> Hi, I'm Matthew! I am a Senior at the University of Wisconsin-Madison studying Computer Science and Data
+          Science. I'm particularly interested in full-stack web development and machine learning applications.</p>
+
+        <p>Other than programming, I enjoy discovering new music and playing it on my radio show on WSUM 91.7. On top of
+          that, I'm trying to learn new instruments like the guitar and harmonica.</p>
+
+        <p>I also love to cook and bake new recipes which you'll see below. I'm eager to travel more to experience new
+          cultures and cuisines, keeping an open mind wherever I go.</p>
+      </div>
+    </div>
+
+    <div class="travel-title-container">
+      <h1>Travel</h1>
+      <p>Enjoy your youth. Travel the world. Broaden your horizons. Embrace culture.</p>
+    </div>
+    <!-- First Pair: Img Left, Text Right-->
+    <div class="about-item">
+      <img src="/images/aquarium.webp" alt="tokyo art aquarium" class="about-img">
+      <div class="about-txt">
+        <h2>Art Aquarium Museum</h2>
+        <h3>Tokyo, Japan</h3>
+        <p>Janurary 9, 2025</p>
+      </div>
+    </div>
+
+    <!-- Second Pair: Img Right, Text Left-->
+    <div class="about-item reverse">
+      <img src="/images/osaka-castle.webp" alt="Osaka Castle" class="about-img">
+      <div class="about-txt">
+        <h2>Osaka Castle</h2>
+        <h3>Osaka, Japan</h3>
+        <p>December 31, 2024</p>
+      </div>
+    </div>
+
+    <!-- Third Pair: Img Left, Text Right-->
+    <div class="about-item">
+      <img src="/images/nijo-castle.webp" alt="Nijo Castle In Japan" class="about-img">
+      <div class="about-txt">
+        <h2>Nijō Castle</h2>
+        <h3>Kyoto, Japan</h3>
+        <p>January 4, 2025</p>
+      </div>
+    </div>
+
+    <!-- Fourth Pair: Img Right, Text Left-->
+    <div class="about-item reverse">
+      <img src="/images/taiwain-nm.webp" alt="Taiwan Night Market" class="about-img">
+      <div class="about-txt">
+        <h2>Raohe Street Night Market</h2>
+        <h3>Taipei, Taiwan</h3>
+        <p>January 13, 2025</p>
+      </div>
+    </div>
+
+    <!-- SECTION 2: FOOD -->
+    <div class="travel-title-container">
+      <h1>Food</h1>
+      <p>Try it at least once. You might miss out.</p>
+    </div>
+
+    <div class="slideshow-wrapper">
+      <div class="slideshow-container">
+        <!-- Slide 1 -->
+        <div class="slide active">
+          <img src="/images/ramen.webp">
+          <div class="slide-content">
+            <h2>Special Miso Ramen</h2>
+            <p>Special miso ramen with char siu pork, tea eggs, and veggies.</p>
+            <h3 class="food-location">Osaka, Japan</h3>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="slide">
+          <img src="/images/duck-ramen.webp">
+          <div class="slide-content">
+            <h2>🦆🍒😋</h2>
+            <p>Rice bowl with duck breast and thigh, mixed greens, and egg yolk on top.</p>
+            <h3 class="food-location">Gion Duck Noodes - Kyoto, Japan</h3>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="slide">
+          <img src="/images/banana-bread.webp">
+          <div class="slide-content">
+            <h2>Homemade Banana Bread</h2>
+            <p>Homemade banana bread with chocolate chips. Secret recipe tho...</p>
+            <h3 class="food-location">Madison, Wisconsin</h3>
+          </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+          <img src="/images/seafood-shabu-shabu.webp">
+          <div class="slide-content">
+            <h2>Seafood Shabu Shabu</h2>
+            <p>Seabrim and Amberjack shabu-shabu at a hot spring inn in Japan.</p>
+            <h3 class="food-location">Ito, Japan</h3>
+          </div>
+        </div>
+
+        <!-- Navigation arrows -->
+        <button class="nav-arrow prev" onclick="changeSlide(-1)">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="nav-arrow next" onclick="changeSlide(1)">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+
+        <!-- Dots indicator -->
+        <div class="dots-container">
+          <span class="dot active" onclick="currentSlide(1)"></span>
+          <span class="dot" onclick="currentSlide(2)"></span>
+          <span class="dot" onclick="currentSlide(3)"></span>
+          <span class="dot" onclick="currentSlide(4)"></span>
+        </div>
+      </div>
+    </div>
+
+    <div class="travel-title-container">
+      <h1>Music</h1>
+      <p>Discover new sounds. Share the vibe. Create the soundtrack.</p>
+    </div>
+
+    <!-- Spotify Playlist Container -->
+    <div class="spotify-container">
+      <div class="playlist-header">
+        <h2>Current Rotation</h2>
+        <p>Recent music I've been listening too - mix of personal favorites and new discoveries</p>
+      </div>
+
+      <!-- Embed Spotify -->
+      <div class="spotify-embed">
+        <iframe style="border-radius:12px"
+          src="https://open.spotify.com/embed/playlist/3da72HY9I5QZDYYJ1A2UJg?utm_source=generator" width="100%"
+          height="600" frameBorder="0" allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy">
+        </iframe>
+      </div>
+
+      <!-- Open in Spotify button-->
+      <div style="text-align: center;">
+        <a href="https://open.spotify.com/playlist/3da72HY9I5QZDYYJ1A2UJg?si=f7fe518c831b449e&pt=111feeddc8390461609b6b96cab07c7d"
+          target="_blank" class="spotify-link">
+          <i class="fa-brands fa-spotify"></i>
+          Open in Spotify
+        </a>
+      </div>
+
+      <!-- Additional Playlists-->
+      <div class="additional-playlists">
+        <h3>More Playlists</h3>
+        <div class="playlist-grid">
+          <div class="mini-playlist">
+            <h4>Chiller Trap</h4>
+            <p>Great chill background music for those long programming sessions.</p>
+            <a href="https://open.spotify.com/playlist/0t5t6bK9a51gp9fCvEFyga?si=9b3136a721864bb7"
+              target="_blank">Listen on Spotify</a>
+          </div>
+
+          <div class="mini-playlist">
+            <h4>Stargazing</h4>
+            <p>The name speaks for itself.</p>
+            <a href="https://open.spotify.com/playlist/3hpco0RXGCMBnt5vPySAw1?si=8a15b4323fde4f98"
+              target="_blank">Listen on
+              Spotify</a>
+          </div>
+
+          <div class="mini-playlist">
+            <h4>Test Your Luck</h4>
+            <p>Something random, just go head on.</p>
+            <a href="https://open.spotify.com/playlist/1defz1TB746jyKCJ0yVgW7?si=c8ec773c2c2948b0"
+              target="_blank">Listen on
+              Spotify</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+  <footer>
+    <div class="footer-border"></div>
+    <p>Designed & Built by Matthew Yu © 2025</p>
+  </footer>
+
+</body>
+
+</html>
