@@ -296,7 +296,7 @@ class LogoController {
         e.preventDefault();
 
         // Always navigate to home page (home.html)
-        this.navigateWithTransition('home.html');
+        this.navigateWithTransition('index.html');
       });
     }
   }
