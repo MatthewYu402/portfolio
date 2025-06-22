@@ -188,7 +188,10 @@ nav a.active {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: 3rem;
+  text-align: center;
+  width: 100%;
 }
 
 .mobile-nav a {
@@ -205,6 +208,10 @@ nav a.active {
   background-clip: text;
   position: relative;
   overflow: hidden;
+  text-align: center;
+  display: block;
+  width: auto;
+  margin: 0 auto;
 }
 
 .mobile-nav a::before {
