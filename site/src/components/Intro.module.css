@@ -1,0 +1,503 @@
+/*
+ * COWBOY BEBOP INTRO — ported from the original styles.css (lines ~1149–1760, 2288–2345).
+ *
+ * Timings, keyframes and positions are unchanged. The old site set
+ * `html { font-size: 62.5% }`, so every `rem` there was 10px; they're written
+ * as px here so the intro renders at the same size inside the new app.
+ * The line sweeps animate top/left/right/bottom exactly as before — this file is
+ * deliberately exempt from the "transform/opacity only" rule the rest of the site follows.
+ */
+
+.overlay {
+  --text-color: #faf9f6;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  overflow: hidden;
+  background: #000;
+  color: #fff;
+  font-family: 'League Spartan', sans-serif;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: left;
+  cursor: pointer;
+  opacity: 1;
+  transition: opacity var(--exit-ms, 1500ms) ease-out;
+}
+
+.overlay * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'League Spartan', sans-serif;
+}
+
+.exiting {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* COWBOY BEBOP ANIMATION */
+.line {
+  position: absolute;
+  background: #ffaa00;
+  z-index: 10;
+}
+
+.animationContainer {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.lineTop {
+  height: 3px;
+  width: 100vw;
+  top: 0;
+  right: 0;
+  animation:
+    moveTopLine 6s ease-in-out forwards,
+    flicker 0.35s infinite;
+  transform-origin: left center;
+}
+
+.lineBottom {
+  height: 3px;
+  width: 100vw;
+  bottom: 0;
+  right: 0;
+  animation:
+    moveBottomLine 6s ease-in-out forwards,
+    flicker 0.35s infinite;
+  transform-origin: right center;
+}
+
+.lineRight {
+  height: 100vh;
+  width: 3px;
+  top: 0;
+  right: 0;
+  animation:
+    moveRightLine 6s ease-in-out forwards,
+    flicker 0.35s infinite;
+  transform-origin: top center;
+}
+
+.lineLeft {
+  height: 100vh;
+  width: 3px;
+  top: 0;
+  right: 0;
+  animation:
+    moveLeftLine 6s ease-in-out forwards,
+    flicker 0.35s infinite;
+  transform-origin: bottom center;
+}
+
+.line.noFlicker {
+  animation-duration: 6s;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+}
+
+.lineTop.noFlicker {
+  animation-name: moveTopLine;
+}
+
+.lineBottom.noFlicker {
+  animation-name: moveBottomLine;
+}
+
+.lineRight.noFlicker {
+  animation-name: moveRightLine;
+}
+
+.lineLeft.noFlicker {
+  animation-name: moveLeftLine;
+}
+
+.line.fadeOut {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+
+/* IMAGE REVEAL ANIMATION */
+.blueBackground {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 60vh;
+  background-color: #1a4873;
+  z-index: 5;
+  clip-path: polygon(0% 100%, 0% 100%, 0% 100%, 0% 100%);
+  animation: unveilFromBottomLeft 6s ease-in-out forwards;
+}
+
+.revealImage {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 60vh;
+  background-image: url('../assets/images/cbintrosillouette.webp');
+  background-size: 85%;
+  background-position: -100% center;
+  background-repeat: no-repeat;
+  z-index: 7;
+  clip-path: polygon(0% 100%, 0% 100%, 0% 100%, 0% 100%);
+  animation: unveilFromBottomLeft 6s ease-in-out forwards;
+}
+
+.fadeInImage {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 60vh;
+  background-image: url('../assets/images/cb blue.webp');
+  background-size: 85%;
+  background-position: -100% center;
+  background-repeat: no-repeat;
+  z-index: 8;
+  opacity: 0;
+  animation: fadeInPhoto 4s ease-in-out 6.1s forwards;
+}
+
+.authorAnimationContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 15;
+  pointer-events: none;
+}
+
+.textSet1 {
+  top: 33%;
+  left: 7%;
+  position: absolute;
+  --base-delay: 6s;
+}
+
+.textSet2 {
+  top: 33%;
+  left: 7%;
+  position: absolute;
+  --base-delay: 9.6s;
+}
+
+.topText {
+  font-size: 35px;
+  font-weight: 800;
+  color: white;
+  text-align: left;
+  margin-bottom: 5px;
+  transform: translateY(-60px);
+  opacity: 0;
+  animation: fadeIn 3.5s ease-in-out var(--base-delay) forwards;
+}
+
+.bottomText {
+  font-size: 0;
+  font-weight: 800;
+  text-align: left;
+  transform: translateY(-60px);
+}
+
+.char {
+  font-size: 75px;
+  color: var(--text-color);
+  display: inline-block;
+  margin: 0;
+  opacity: 0;
+  padding: 0;
+  vertical-align: baseline;
+  animation: fadeIn 3.5s ease-in-out forwards;
+}
+
+.char.space {
+  width: 10px;
+}
+
+/* Fade in chars in names one by one with some delay */
+.char:nth-child(1) { animation-delay: calc(var(--base-delay) + 0.15s); }
+.char:nth-child(2) { animation-delay: calc(var(--base-delay) + 0.35s); }
+.char:nth-child(3) { animation-delay: calc(var(--base-delay) + 0.2s); }
+.char:nth-child(4) { animation-delay: calc(var(--base-delay) + 0.3s); }
+.char:nth-child(5) { animation-delay: calc(var(--base-delay) + 0.25s); }
+.char:nth-child(6) { animation-delay: calc(var(--base-delay) + 0.4s); }
+.char:nth-child(7) { animation-delay: calc(var(--base-delay) + 0.1s); }
+.char:nth-child(8) { animation-delay: calc(var(--base-delay) + 0.13s); }
+.char:nth-child(9) { animation-delay: calc(var(--base-delay) + 0.33s); }
+.char:nth-child(10) { animation-delay: calc(var(--base-delay) + 0.17s); }
+.char:nth-child(11) { animation-delay: calc(var(--base-delay) + 0.28s); }
+.char:nth-child(12) { animation-delay: calc(var(--base-delay) + 0.12s); }
+.char:nth-child(13) { animation-delay: calc(var(--base-delay) + 0.22s); }
+
+/* Moving text in the background */
+.movingTextContainer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100vw;
+  height: 60vh;
+  z-index: 6;
+  clip-path: polygon(0% 100%, 0% 100%, 0% 100%, 0% 100%);
+  animation: unveilFromBottomLeft 6s ease-in-out forwards;
+}
+
+.movingText {
+  position: absolute;
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--text-color);
+  white-space: nowrap;
+}
+
+.movingText span {
+  color: black !important;
+}
+
+.overlay .fontSpartan {
+  font-size: 20px;
+  font-family: 'League Spartan', sans-serif;
+  font-weight: 800;
+}
+
+.overlay .fontPlayfair {
+  font-size: 20px;
+  font-family: 'Playfair Display', sans-serif;
+  font-weight: 800;
+}
+
+.overlay .fontMono {
+  font-size: 20px;
+  font-family: 'Roboto Mono', sans-serif;
+  font-weight: 800;
+}
+
+.moveLeft1 {
+  --left-vw-before: 45vw;
+  --left-vw-after: 25vw;
+  text-align: right;
+  top: 0%;
+  animation: moveLeft 12s linear 3s infinite;
+}
+
+.moveLeft1 span {
+  font-size: 30px !important;
+}
+
+.moveLeft2 {
+  --left-vw-before: 20vw;
+  --left-vw-after: 0vw;
+  text-align: right;
+  top: 20%;
+  animation: moveLeft 12s linear 3s infinite;
+}
+
+.moveLeft2 span {
+  font-size: 22.5px !important;
+}
+
+.moveLeft3 {
+  --left-vw-before: 30vw;
+  --left-vw-after: 10vw;
+  color: var(--text-color);
+  top: 42%;
+  animation: moveLeft 12s linear 3s infinite;
+}
+
+.moveLeft4 {
+  --left-vw-before: 50vw;
+  --left-vw-after: 30vw;
+  text-align: right;
+  bottom: 22%;
+  animation: moveLeft 12s linear 3s infinite;
+}
+
+.moveLeft4 span {
+  font-size: 23.5px !important;
+}
+
+.moveLeft5 {
+  --left-vw-before: 25vw;
+  --left-vw-after: 5vw;
+  text-align: right;
+  bottom: -2%;
+  animation: moveLeft 12s linear 3s infinite;
+}
+
+.moveLeft5 span {
+  font-size: 120px !important;
+}
+
+.moveRight1 {
+  --right-vw-before: 15vw;
+  --right-vw-after: -5vw;
+  text-align: left;
+  top: 8%;
+  animation: moveRight 12s linear 3s infinite;
+}
+
+.moveRight1 span {
+  font-size: 23px !important;
+}
+
+.moveRight2 {
+  --right-vw-before: 5vw;
+  --right-vw-after: -15vw;
+  top: 27%;
+  animation: moveRight 12s linear 3s infinite;
+}
+
+.moveRight2 span {
+  font-size: 25px !important;
+}
+
+.moveRight3 {
+  --right-vw-before: 15vw;
+  --right-vw-after: -5vw;
+  text-align: right;
+  bottom: 41%;
+  animation: moveRight 12s linear 3s infinite;
+}
+
+.moveRight3 span {
+  font-size: 21.5px !important;
+}
+
+/* Skip control (new — the original only had click-anywhere). */
+.skip {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 2px solid rgba(250, 249, 246, 0.7);
+  background: rgba(0, 0, 0, 0.55);
+  color: #faf9f6;
+  font: 700 13px/1 'Space Grotesk', system-ui, sans-serif !important;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 200ms ease-out, color 200ms ease-out;
+}
+
+.skip:hover {
+  background: #faf9f6;
+  color: #000;
+}
+
+.skip:focus-visible {
+  outline: 3px solid #ffaa00;
+  outline-offset: 3px;
+}
+
+/* KEYFRAMES */
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes moveLeft {
+  0% { left: var(--left-vw-before); }
+  100% { left: var(--left-vw-after); }
+}
+
+@keyframes moveRight {
+  0% { right: var(--right-vw-before); }
+  100% { right: var(--right-vw-after); }
+}
+
+/* Fade-in animation for photo on top of silhouette */
+@keyframes fadeInPhoto {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Unveils the animation and background from bottom left */
+@keyframes unveilFromBottomLeft {
+  0% { clip-path: polygon(0% 100%, 0% 100%, 0% 100%, 0% 100%); }
+  50% { clip-path: polygon(0% 100%, 50% 100%, 50% 100%, 0% 100%); }
+  100% { clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%); }
+}
+
+/* Animation for the flickering lines */
+@keyframes moveTopLine {
+  0% { top: 40%; opacity: 1; transform: scaleX(0.8); }
+  25% { top: -0.5%; opacity: 0; transform: scaleX(0.5); }
+  50% { bottom: -0.5%; top: auto; opacity: 0; transform: scaleX(0.5); }
+  100% { bottom: 60%; top: auto; opacity: 0; transform: scaleX(1); }
+}
+
+@keyframes moveBottomLine {
+  0% { bottom: 40%; opacity: 1; transform: scaleX(0.8); }
+  25% { bottom: -0.5%; opacity: 0; transform: scaleX(0.5); }
+  50% { top: -0.5%; bottom: auto; opacity: 0; transform: scaleX(0.5); }
+  100% { top: 40%; bottom: auto; opacity: 0; transform: scaleX(1); }
+}
+
+@keyframes moveRightLine {
+  0% { right: 20%; opacity: 1; transform: scaleY(0.6); }
+  25% { right: 50%; opacity: 1; transform: scaleY(1); }
+  50% { right: 50%; opacity: 1; transform: scale(1); }
+  100% { right: 100%; opacity: 0; transform: scale(0.4); }
+}
+
+@keyframes moveLeftLine {
+  0% { left: 20%; opacity: 1; transform: scaleY(0.6); }
+  25% { left: 50%; opacity: 1; transform: scaleY(1); }
+  50% { left: 50%; opacity: 1; transform: scaleY(1); }
+  100% { left: 100%; opacity: 0; transform: scaleY(0.6); }
+}
+
+/* Flickering effect on the lines */
+@keyframes flicker {
+  0%, 20%, 40%, 60%, 80%, 100% { opacity: 0.05; }
+  10%, 30%, 50%, 70%, 90% { opacity: 0.9; }
+}
+
+@keyframes unveilFromBottomLeftMobile {
+  0% { clip-path: polygon(0% 100%, 0% 100%, 0% 100%, 0% 100%); }
+  2% { clip-path: polygon(0% 100%, 70% 100%, 70% 80%, 0% 80%); }
+  100% { clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%); }
+}
+
+@media (max-width: 500px) {
+  .topText {
+    font-size: 26.5px;
+  }
+
+  .char {
+    font-size: 40px;
+  }
+
+  .authorAnimationContainer {
+    transform: translateY(40px);
+  }
+
+  .revealImage,
+  .fadeInImage {
+    bottom: -100px;
+    left: -60px;
+    background-size: 150%;
+    background-position: 75% center;
+    animation: unveilFromBottomLeftMobile 6s ease-in-out forwards;
+  }
+
+  .fadeInImage {
+    animation: fadeInPhoto 4s ease-in-out 6.1s forwards;
+  }
+}

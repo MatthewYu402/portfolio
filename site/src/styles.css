@@ -1,0 +1,1342 @@
+/* =========================================================================
+   RED SLASH — portfolio styles
+   Reference: design/red-slash.html
+   1. Tokens & base       5. Hero            9. About + music
+   2. Textures            6. Projects       10. Contact & footer
+   3. Panels              7. Experience     11. Mobile (< 760px)
+   4. Navbar & headers    8. Skills         12. Reduced motion
+   ========================================================================= */
+
+/* 1. Tokens & base ------------------------------------------------------- */
+:root {
+  --paper: #f4f2ec;
+  --panel: #ffffff;
+  --ink: #0e0e0e;
+  --accent: #c8102e;
+  /* Darker red for small text so it passes contrast on white and paper. */
+  --accent-text: #b00d27;
+  --body: #2a2a2a;
+  --muted: #555555;
+
+  --display: 'Rubik Dirt', 'Space Grotesk', system-ui, sans-serif;
+  --sans: 'Space Grotesk', system-ui, sans-serif;
+  --ease: 200ms ease-out;
+
+  color-scheme: light;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+:root,
+:root body {
+  background: var(--paper);
+}
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+.app {
+  min-height: 100vh;
+  /* Belt and braces against horizontal scroll; `clip` (unlike `hidden`) keeps the nav sticky. */
+  overflow-x: clip;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: var(--ink);
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--accent-text);
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.display {
+  font-family: var(--display);
+  font-weight: 400;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
+
+.section {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 96px 32px 24px;
+  /* Land headings just below the sticky nav (its height is measured in Navbar.tsx). */
+  scroll-margin-top: calc(var(--nav-h, 80px) - 56px);
+}
+
+.g12 {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.g12 > * {
+  min-width: 0;
+}
+
+.chip {
+  position: relative;
+  font-weight: 500;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: var(--panel);
+  padding: 6px 10px;
+}
+
+.row-label {
+  margin: 0;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cta--accent {
+  color: var(--accent-text);
+}
+
+.cta--box {
+  padding: 0 16px;
+  background: var(--panel);
+  border: 2px solid var(--ink);
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+}
+
+/* 2. Textures ------------------------------------------------------------ */
+.tone {
+  background-image: radial-gradient(var(--ink) 1px, transparent 1.4px);
+  background-size: 8px 8px;
+}
+
+.tone-fade {
+  background-image: radial-gradient(var(--ink) 1.2px, transparent 1.6px);
+  background-size: 8px 8px;
+  -webkit-mask-image: linear-gradient(160deg, #000 10%, transparent 75%);
+  mask-image: linear-gradient(160deg, #000 10%, transparent 75%);
+}
+
+.speed {
+  background-image: repeating-conic-gradient(
+    from 0deg at 32% 58%,
+    rgba(14, 14, 14, 0.09) 0deg 1deg,
+    transparent 1deg 5deg
+  );
+}
+
+/* 3. Panels --------------------------------------------------------------
+   Outer ink frame + white inner share the same clip-path; the 4px padding
+   between them becomes the angled border. */
+.s1 { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 93%); }
+.s2 { clip-path: polygon(6% 0, 100% 0, 100% 100%, 0 100%); }
+.s3 { clip-path: polygon(0 0, 100% 4%, 100% 100%, 0 100%); }
+.s4 { clip-path: polygon(0 0, 97% 0, 100% 100%, 0 100%); }
+.s5 { clip-path: polygon(3% 0, 100% 0, 100% 100%, 0 100%); }
+.s6 { clip-path: polygon(0 0, 100% 0, 100% 96%, 0 100%); }
+
+.panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel__frame {
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  background: var(--ink);
+}
+
+.panel__inner {
+  position: relative;
+  flex: 1;
+  background-color: var(--panel);
+}
+
+/* Hover / focus pop: the panel scales up and an offset layer grows in behind it.
+   Everything is transform/opacity, so neighbouring panels never move. */
+.panel--pop .panel__frame {
+  transition: transform var(--ease);
+}
+
+.panel__pop {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: translate(0, 0) scale(0.97);
+  transition:
+    transform var(--ease),
+    opacity var(--ease);
+  pointer-events: none;
+}
+
+.panel--strong .panel__pop {
+  background-color: var(--accent);
+  background-image: radial-gradient(rgba(14, 14, 14, 0.35) 1.2px, transparent 1.6px);
+  background-size: 8px 8px;
+}
+
+.panel--subtle .panel__pop {
+  background-image: radial-gradient(var(--ink) 1.2px, transparent 1.6px);
+  background-size: 8px 8px;
+}
+
+.panel--pop:focus-visible,
+.panel--pop:focus-within {
+  z-index: 2;
+}
+
+.panel--strong:focus-visible .panel__frame,
+.panel--strong:focus-within .panel__frame {
+  transform: scale(1.03);
+}
+
+.panel--strong:focus-visible .panel__pop,
+.panel--strong:focus-within .panel__pop {
+  opacity: 1;
+  transform: translate(6px, 6px) scale(1.03);
+}
+
+.panel--subtle:focus-within .panel__frame {
+  transform: scale(1.015);
+}
+
+.panel--subtle:focus-within .panel__pop {
+  opacity: 0.55;
+  transform: translate(6px, 6px) scale(1.015);
+}
+
+@media (hover: hover) {
+  .panel--pop:hover {
+    z-index: 2;
+  }
+
+  .panel--strong:hover .panel__frame {
+    transform: scale(1.03);
+  }
+
+  .panel--strong:hover .panel__pop {
+    opacity: 1;
+    transform: translate(6px, 6px) scale(1.03);
+  }
+
+  .panel--subtle:hover .panel__frame {
+    transform: scale(1.015);
+  }
+
+  .panel--subtle:hover .panel__pop {
+    opacity: 0.55;
+    transform: translate(6px, 6px) scale(1.015);
+  }
+}
+
+/* 4. Navbar & section headers ------------------------------------------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--paper);
+  border-bottom: 4px solid var(--ink);
+}
+
+.navbar__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 14px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.logo {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 6px;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.logo:hover {
+  color: var(--ink);
+}
+
+.logo__splat {
+  position: absolute;
+  left: -14px;
+  top: -8px;
+  pointer-events: none;
+}
+
+.logo__name {
+  position: relative;
+  font-size: 34px;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.navbar__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 14px;
+  color: var(--ink);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.nav-link:hover {
+  color: var(--ink);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 4px;
+  height: 4px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--ease);
+}
+
+.nav-link__num {
+  display: inline-block;
+  font-size: 10px;
+  color: var(--accent-text);
+  transition: transform var(--ease);
+}
+
+.nav-link:hover::after,
+.nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.nav-link:hover .nav-link__num,
+.nav-link:focus-visible .nav-link__num {
+  transform: translateY(-3px);
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 32px;
+}
+
+.section-header__num {
+  padding-bottom: 14px;
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  color: var(--accent-text);
+}
+
+.section-header__title {
+  margin: 0;
+  font-size: 96px;
+  line-height: 0.9;
+}
+
+.section-header__rule {
+  flex: 1;
+  min-width: 80px;
+  height: 5px;
+  margin-bottom: 20px;
+  background: var(--ink);
+  transform: skewX(-40deg);
+}
+
+/* 5. Hero ---------------------------------------------------------------- */
+.hero {
+  padding-top: 40px;
+}
+
+.hero__main {
+  /* Lets the name size itself to the panel (cqi) so it never overflows. */
+  container-type: inline-size;
+  min-height: 560px;
+  padding: 56px 48px 96px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 18px;
+  overflow: hidden;
+}
+
+.hero__slash {
+  position: absolute;
+  left: -6%;
+  top: 47%;
+  width: 118%;
+  height: 26px;
+  background: var(--accent);
+  transform: rotate(-7deg);
+}
+
+.hero__kicker {
+  position: relative;
+  margin: 0;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+}
+
+.hero__name {
+  position: relative;
+  margin: 0;
+  font-size: min(168px, 18cqi);
+  line-height: 0.84;
+  color: var(--ink);
+}
+
+.hero__name-line {
+  display: block;
+}
+
+.hero__side {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero__side-tone {
+  position: absolute;
+  inset: 0;
+  opacity: 0.4;
+}
+
+.hero__side-text {
+  position: relative;
+  writing-mode: vertical-rl;
+  font-size: 84px;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.caption-box {
+  position: relative;
+  z-index: 1;
+  max-width: 540px;
+  margin: -84px 0 0 48px;
+  padding: 22px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background: var(--panel);
+  border: 2px solid var(--ink);
+}
+
+.caption-box__text {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.45;
+}
+
+.caption-box__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.replay {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  margin: 10px 0 0 48px;
+  padding: 0 6px;
+  border: 0;
+  background: none;
+  color: var(--ink);
+  font: 700 12px/1 var(--sans);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.replay__icon {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 10px;
+  transition: transform var(--ease);
+}
+
+.replay:hover {
+  color: var(--accent-text);
+}
+
+.replay:hover .replay__icon,
+.replay:focus-visible .replay__icon {
+  transform: translateX(3px);
+}
+
+/* 6. Projects ------------------------------------------------------------ */
+.project {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100%;
+}
+
+.project--a { padding: 40px 28px 28px; }
+.project--b { padding: 28px 28px 28px 40px; }
+.project--c { padding: 28px 28px 44px; }
+.project--d { padding: 28px 48px 28px 28px; }
+
+.project__shot {
+  position: relative;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.project--c .project__shot {
+  height: 220px;
+}
+
+.project__shot img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.project__shot-tone {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(var(--ink) 1px, transparent 1.4px);
+  background-size: 8px 8px;
+  opacity: 0.18;
+}
+
+.project--b .project__shot-tone {
+  background-image: radial-gradient(var(--ink) 1.2px, transparent 1.6px);
+  -webkit-mask-image: linear-gradient(160deg, #000 10%, transparent 75%);
+  mask-image: linear-gradient(160deg, #000 10%, transparent 75%);
+  opacity: 0.5;
+}
+
+.project--c .project__shot-tone {
+  opacity: 0.12;
+}
+
+.project__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.project__title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.project--c .project__title,
+.project--d .project__title {
+  font-size: 24px;
+}
+
+.project__year {
+  flex-shrink: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.project__desc {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--body);
+}
+
+.project__foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: auto;
+}
+
+.project__stack {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.project__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.project--next {
+  justify-content: flex-end;
+  min-height: 380px;
+}
+
+.project__next {
+  font-size: 64px;
+  line-height: 1;
+  color: var(--accent);
+}
+
+.chip-bg {
+  align-self: flex-start;
+  padding: 4px 8px;
+  background: var(--panel);
+}
+
+/* 7. Experience ---------------------------------------------------------- */
+.job {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+  padding: 28px 40px 32px 28px;
+  overflow: hidden;
+}
+
+.job--right {
+  padding: 28px 28px 32px 40px;
+}
+
+.job > * {
+  position: relative;
+}
+
+.job > .job__tone {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 60%;
+  height: 60%;
+  opacity: 0.25;
+  transform: rotate(180deg);
+}
+
+.job__dates {
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+.job__role {
+  margin: 0;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.job__company {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.job__highlights {
+  margin: 6px 0 0;
+  padding-left: 18px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--body);
+  list-style: square;
+}
+
+.job__highlights li + li {
+  margin-top: 8px;
+}
+
+.job__highlights li::marker {
+  color: var(--accent);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 24px;
+}
+
+.edu {
+  margin-top: 48px;
+  padding: 22px 0;
+  border-top: 4px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+}
+
+.edu .row-label {
+  padding-top: 4px;
+}
+
+.edu__list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.edu__item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.edu__dates {
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  color: var(--accent-text);
+}
+
+.edu__degree {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.edu__school {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.edu__desc {
+  margin: 4px 0 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--body);
+}
+
+/* 8. Skills -------------------------------------------------------------- */
+.skills__row {
+  padding: 26px 0;
+  border-top: 1px solid var(--ink);
+}
+
+.skills__row:first-child {
+  border-top-width: 4px;
+}
+
+.skills__row:last-child {
+  border-bottom: 4px solid var(--ink);
+}
+
+.skills .row-label {
+  padding-top: 10px;
+}
+
+.skills__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.35em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-weight: 700;
+  font-size: 42px;
+  line-height: 1.15;
+}
+
+.slash {
+  color: var(--accent);
+}
+
+/* 9. About + music ------------------------------------------------------- */
+.about__portrait {
+  height: 100%;
+  min-height: 560px;
+  overflow: hidden;
+}
+
+.photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-tone {
+  position: absolute;
+  inset: 0;
+  opacity: 0.12;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+.about__shot {
+  min-height: 270px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.about__shot-tone {
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+}
+
+.about__caption {
+  position: absolute;
+  left: 14px;
+  bottom: 18px;
+}
+
+.about__profile {
+  grid-column: span 8;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 18px 8px 0;
+}
+
+.balloon {
+  position: relative;
+  align-self: flex-start;
+  max-width: 640px;
+  margin: 0 0 30px;
+  padding: 44px 64px;
+  text-align: center;
+  background: var(--panel);
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+}
+
+.balloon p {
+  margin: 0;
+  font-weight: 700;
+  font-size: 26px;
+  line-height: 1.3;
+}
+
+.balloon__tail {
+  position: absolute;
+  left: 30%;
+  bottom: -30px;
+}
+
+.about__bio p {
+  max-width: 64ch;
+  margin: 0 0 12px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--body);
+}
+
+.stats {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  margin: 12px 0 0;
+  border-top: 4px solid var(--ink);
+}
+
+.stats__item {
+  padding: 14px 14px 0;
+  border-left: 1px solid var(--ink);
+}
+
+.stats__item:first-child {
+  padding-left: 0;
+  border-left: 0;
+}
+
+.stats__item:last-child {
+  padding-right: 0;
+}
+
+.stats dt {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-text);
+}
+
+.stats dd {
+  margin: 6px 0 0;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.music {
+  margin-top: 80px;
+}
+
+.music__head {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 20px;
+  border-top: 4px solid var(--ink);
+}
+
+.music__title {
+  margin: 0;
+  font-size: 56px;
+  line-height: 0.95;
+}
+
+.music__desc {
+  max-width: 60ch;
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--body);
+}
+
+.music__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 32px;
+  margin-top: 24px;
+}
+
+.music__embed {
+  border: 4px solid var(--ink);
+  background: var(--ink);
+}
+
+.music__embed iframe {
+  display: block;
+  width: 100%;
+  height: 520px;
+  border: 0;
+}
+
+.music__side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.music__more {
+  margin-top: 8px;
+}
+
+.playlists {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.playlists__item {
+  padding: 14px 0 4px;
+  border-top: 1px solid var(--ink);
+}
+
+.playlists__item:last-child {
+  border-bottom: 1px solid var(--ink);
+}
+
+.playlists__title {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.playlists__desc {
+  margin: 4px 0 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--body);
+}
+
+.playlists .cta {
+  font-size: 13px;
+}
+
+/* 10. Contact & footer --------------------------------------------------- */
+.section--contact {
+  padding-bottom: 0;
+}
+
+.contact {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 96px 56px 64px;
+  overflow: hidden;
+}
+
+.contact > * {
+  position: relative;
+}
+
+.contact > .contact__bang {
+  position: absolute;
+  right: 40px;
+  top: 40px;
+  font-size: 180px;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.9;
+  transform: rotate(-8deg);
+}
+
+.contact__kicker {
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  color: var(--accent-text);
+}
+
+.contact__title {
+  margin: 0;
+  font-size: 132px;
+  line-height: 0.86;
+}
+
+.block {
+  display: block;
+}
+
+.contact__email {
+  align-self: flex-start;
+  max-width: 100%;
+  padding: 6px 10px;
+  background: var(--panel);
+  font-weight: 700;
+  font-size: 32px;
+  text-decoration-thickness: 3px;
+  overflow-wrap: anywhere;
+}
+
+.contact__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 16px;
+  background: var(--panel);
+  border: 2px solid var(--ink);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+  transition:
+    transform var(--ease),
+    box-shadow var(--ease);
+}
+
+.btn:hover,
+.btn:focus-visible {
+  color: var(--ink);
+  transform: translate(-2px, -2px);
+  box-shadow: 4px 4px 0 var(--accent);
+}
+
+.footer {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 28px 32px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 13px;
+  letter-spacing: 0.12em;
+}
+
+.footer__top {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 44px;
+  font-weight: 700;
+}
+
+/* 11. Mobile (< 760px) --------------------------------------------------- */
+@media (max-width: 759px) {
+  .g12 > * {
+    grid-column: 1 / -1 !important;
+    grid-row: auto !important;
+  }
+
+  .hide-sm {
+    display: none !important;
+  }
+
+  .big {
+    font-size: 76px !important;
+  }
+
+  /* "MATTHEW" can't fit at 76px on the narrowest phones, so cap it to the panel width. */
+  .hero__name.big {
+    font-size: min(76px, 18cqi) !important;
+  }
+
+  .row {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .section {
+    padding: 64px 16px 16px;
+  }
+
+  .hero {
+    padding-top: 24px;
+  }
+
+  .navbar__inner {
+    padding: 10px 16px;
+    gap: 6px;
+  }
+
+  .logo__name {
+    font-size: 28px;
+  }
+
+  .navbar__links {
+    gap: 0;
+  }
+
+  .nav-link {
+    padding: 0 8px;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+  }
+
+  .nav-link::after {
+    left: 8px;
+    right: 8px;
+  }
+
+  .section-header__title {
+    /* 56px per the mockup, scaled down so "EXPERIENCE" still fits a 375px screen. */
+    font-size: clamp(40px, 13.5vw, 56px);
+  }
+
+  .hero__main {
+    min-height: 420px;
+    padding: 40px 20px 80px;
+  }
+
+  /* Keep the slash clear of the kicker and name on narrow screens. */
+  .hero__slash {
+    top: 28%;
+  }
+
+  .caption-box {
+    margin: -56px 0 0 12px;
+    padding: 18px 18px;
+  }
+
+  .caption-box__text {
+    font-size: 17px;
+  }
+
+  .replay {
+    margin-left: 12px;
+  }
+
+  .project--a,
+  .project--b,
+  .project--c,
+  .project--d {
+    padding: 28px 20px 32px;
+  }
+
+  .project__shot {
+    height: 200px;
+  }
+
+  .job,
+  .job--right {
+    padding: 28px 24px 32px;
+  }
+
+  .edu__list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .skills__list {
+    font-size: 30px;
+  }
+
+  .skills .row-label {
+    padding-top: 0;
+  }
+
+  .skills__row {
+    gap: 10px;
+  }
+
+  .about__portrait {
+    min-height: 420px;
+  }
+
+  .about__profile {
+    padding: 18px 0 0;
+  }
+
+  .balloon {
+    padding: 32px 36px;
+  }
+
+  .balloon p {
+    font-size: 20px;
+  }
+
+
+  .stats .stats__item {
+    padding: 12px 0;
+    border-left: 0;
+    border-top: 1px solid var(--ink);
+  }
+
+  .stats .stats__item:first-child {
+    border-top: 0;
+  }
+
+  .music {
+    margin-top: 56px;
+  }
+
+  .music__title {
+    font-size: 40px;
+  }
+
+  .music__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .music__embed iframe {
+    height: 380px;
+  }
+
+  .contact {
+    padding: 64px 24px 40px;
+  }
+
+  .contact__email {
+    font-size: 22px;
+  }
+
+  .footer {
+    padding: 24px 16px 40px;
+  }
+}
+
+/* 12. Reduced motion ----------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  .panel__frame,
+  .panel__pop,
+  .nav-link::after,
+  .nav-link__num,
+  .replay__icon,
+  .btn {
+    transition: none !important;
+  }
+
+  /* Keep the offset layer as a static focus/hover cue, but drop all scaling. */
+  .panel--pop .panel__frame {
+    transform: none !important;
+  }
+
+  .panel--pop:hover .panel__pop,
+  .panel--pop:focus-visible .panel__pop,
+  .panel--pop:focus-within .panel__pop {
+    transform: translate(6px, 6px) !important;
+  }
+}
