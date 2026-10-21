@@ -8,7 +8,7 @@ Software engineer based in Phoenix, MD, interested in backend development and bu
 
 | | |
 |---|---|
-| Résumé | [PDF](https://matthewyu402.github.io/portfolio/resume-10-20-26.pdf) · [source file](site/public/resume-10-20-26.pdf) |
+| Résumé | [View PDF](https://github.com/MatthewYu402/portfolio/blob/main/site/public/resume-10-20-26.pdf) |
 | LinkedIn | [linkedin.com/in/matthew-yu-37b860222](https://www.linkedin.com/in/matthew-yu-37b860222/) |
 | GitHub | [github.com/MatthewYu402](https://github.com/MatthewYu402) |
 | Email | [myu22826@gmail.com](mailto:myu22826@gmail.com) |
