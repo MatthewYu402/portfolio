@@ -10,7 +10,7 @@ import styles from './Intro.module.css';
  *   6.4s     lines stop flickering and fade
  *   9.6s     "ORIGINAL CONCEPT HAJIME YATATE"
  *   12s      the intro fades out over 1.5s, revealing the page underneath
- * Click anywhere, the Skip button, or Esc skips with a 0.5s fade.
+ * The Skip button (or Esc) skips with a 0.5s fade. Clicking elsewhere on the screen does nothing.
  */
 const LINES_FADE_AT = 6400;
 const EXIT_AT = 12000;
@@ -167,7 +167,6 @@ export function Intro({ onDone, focusSkip = false }: IntroProps) {
       role="dialog"
       aria-modal="true"
       aria-label="Intro animation"
-      onClick={() => exit(SKIP_MS)}
     >
       <div className={styles.animationContainer} aria-hidden="true">
         <div className={lineClass(styles.lineTop!)} />
@@ -211,10 +210,7 @@ export function Intro({ onDone, focusSkip = false }: IntroProps) {
         type="button"
         className={styles.skip}
         aria-label="Skip intro"
-        onClick={(e) => {
-          e.stopPropagation();
-          exit(SKIP_MS);
-        }}
+        onClick={() => exit(SKIP_MS)}
       >
         Skip intro <span aria-hidden="true">▶▶</span>
       </button>

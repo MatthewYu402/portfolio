@@ -27,6 +27,16 @@ function Screenshot({ project }: { project: Project }) {
   );
 }
 
+function RepoLink({ project, className }: { project: Project; className: string }) {
+  if (!project.repo) return null;
+  return (
+    <a className={className} href={project.repo} target="_blank" rel="noopener noreferrer">
+      GitHub repo <span aria-hidden="true">↗</span>
+      <span className="sr-only"> for {project.title} (opens in a new tab)</span>
+    </a>
+  );
+}
+
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const slot = SLOTS[index % SLOTS.length]!;
   const titleId = `project-${index}-title`;
@@ -48,10 +58,15 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           {project.title}
         </h3>
         <p className="project__desc chip-bg">{project.description}</p>
-        {project.href && (
-          <a className="project__link chip-bg" href={project.href}>
-            Follow along <span aria-hidden="true">→</span>
-          </a>
+        {(project.repo || project.href) && (
+          <div className="project__links">
+            <RepoLink project={project} className="project__link chip-bg" />
+            {project.href && (
+              <a className="project__link chip-bg" href={project.href}>
+                Follow along <span aria-hidden="true">→</span>
+              </a>
+            )}
+          </div>
         )}
       </Panel>
     );
@@ -74,14 +89,17 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
         {project.year && <span className="project__year">{project.year}</span>}
       </div>
       <p className="project__desc">{project.description}</p>
-      {(project.stack.length > 0 || project.href) && (
+      {(project.stack.length > 0 || project.href || project.repo) && (
         <div className="project__foot">
           {project.stack.length > 0 && <span className="project__stack">{project.stack.join(' · ')}</span>}
-          {project.href && (
-            <a className="project__link" href={project.href}>
-              View case <span aria-hidden="true">→</span>
-            </a>
-          )}
+          <div className="project__links">
+            <RepoLink project={project} className="project__link" />
+            {project.href && (
+              <a className="project__link" href={project.href}>
+                View case <span aria-hidden="true">→</span>
+              </a>
+            )}
+          </div>
         </div>
       )}
     </Panel>

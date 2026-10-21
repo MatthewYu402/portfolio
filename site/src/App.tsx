@@ -9,6 +9,25 @@ import { Navbar } from './components/Navbar';
 import { Projects } from './components/Projects';
 import { Skills } from './components/Skills';
 
+// The intro plays on a tab's first visit only; refreshing the page skips it.
+const INTRO_SEEN_KEY = 'introSeen';
+
+function introSeen() {
+  try {
+    return sessionStorage.getItem(INTRO_SEEN_KEY) === '1';
+  } catch {
+    return false;
+  }
+}
+
+function markIntroSeen() {
+  try {
+    sessionStorage.setItem(INTRO_SEEN_KEY, '1');
+  } catch {
+    // Storage blocked (e.g. some private modes) — the intro just plays again next load.
+  }
+}
+
 interface IntroRun {
   key: number;
   /** True when started from the Replay button (rather than on page load). */
@@ -16,9 +35,9 @@ interface IntroRun {
 }
 
 export function App() {
-  // The intro plays on every page load. The site renders underneath it straight away,
-  // so when the intro fades out it crossfades into the Hero with no blank frame.
-  const [intro, setIntro] = useState<IntroRun | null>({ key: 0, replay: false });
+  // The site renders underneath the intro straight away, so when the intro fades out
+  // it crossfades into the Hero with no blank frame.
+  const [intro, setIntro] = useState<IntroRun | null>(() => (introSeen() ? null : { key: 0, replay: false }));
   const replayRef = useRef<HTMLButtonElement>(null);
   const replayingRef = useRef(false);
 
@@ -29,6 +48,11 @@ export function App() {
   }, []);
 
   const onIntroDone = useCallback(() => setIntro(null), []);
+
+  // Mark the intro as seen as soon as it starts, so a refresh mid-intro skips it too.
+  useEffect(() => {
+    if (intro) markIntroSeen();
+  }, [intro]);
 
   // After a replay, hand focus back to the button that started it. This runs after
   // the commit that removes the intro, so `inert` has already been lifted.

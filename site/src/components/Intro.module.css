@@ -21,7 +21,6 @@
   line-height: normal;
   letter-spacing: normal;
   text-align: left;
-  cursor: pointer;
   opacity: 1;
   transition: opacity var(--exit-ms, 1500ms) ease-out;
 }
@@ -142,9 +141,9 @@
   left: 0;
   width: 100vw;
   height: 60vh;
-  background-image: url('../assets/images/cbintrosillouette.webp');
-  background-size: 85%;
-  background-position: -100% center;
+  background-image: url('../assets/images/Photoroom_20261021_154508.webp');
+  background-size: auto 100%;
+  background-position: 28% bottom;
   background-repeat: no-repeat;
   z-index: 7;
   clip-path: polygon(0% 100%, 0% 100%, 0% 100%, 0% 100%);
@@ -157,9 +156,9 @@
   left: 0;
   width: 100vw;
   height: 60vh;
-  background-image: url('../assets/images/cb blue.webp');
-  background-size: 85%;
-  background-position: -100% center;
+  background-image: url('../assets/images/Photoroom_20261021_154450.webp');
+  background-size: auto 100%;
+  background-position: 28% bottom;
   background-repeat: no-repeat;
   z-index: 8;
   opacity: 0;
@@ -488,12 +487,12 @@
     transform: translateY(40px);
   }
 
+  /* The old landscape photo was zoomed to 150% and shifted here; the portrait dog fits
+     the narrow panel as-is, so it's just centred and anchored to the bottom. */
   .revealImage,
   .fadeInImage {
-    bottom: -100px;
-    left: -60px;
-    background-size: 150%;
-    background-position: 75% center;
+    background-size: auto 88%;
+    background-position: 50% bottom;
     animation: unveilFromBottomLeftMobile 6s ease-in-out forwards;
   }
 

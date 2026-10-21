@@ -1,6 +1,11 @@
 import { about, music, type Photo } from '../content';
-import { Panel } from './Panel';
+import { Panel, type PanelShape } from './Panel';
 import { SectionHeader } from './SectionHeader';
+
+const GALLERY_SHAPES: PanelShape[] = ['s3', 's5', 's6', 's4'];
+
+// Up to four photos share one row on desktop; more wrap onto extra rows of four.
+const gallerySpan = (count: number) => (count >= 4 ? 3 : 12 / count);
 
 function PanelPhoto({ photo, eager = false }: { photo: Photo; eager?: boolean }) {
   return (
@@ -23,25 +28,8 @@ export function About() {
       <SectionHeader number="04" title="ABOUT" id="about-title" />
 
       <div className="g12">
-        <Panel shape="s1" span={4} rowSpan={2} innerClassName="about__portrait">
+        <Panel shape="s1" span={4} innerClassName="about__portrait">
           <PanelPhoto photo={about.portrait} />
-          <div className="tone photo-tone" aria-hidden="true" />
-        </Panel>
-
-        <Panel shape="s2" span={4} innerClassName="about__shot">
-          {about.workPhoto ? (
-            <PanelPhoto photo={about.workPhoto} />
-          ) : (
-            <>
-              <div className="tone-fade about__shot-tone" aria-hidden="true" />
-              <span className="chip">TODO — PHOTO AT WORK</span>
-            </>
-          )}
-        </Panel>
-
-        <Panel shape="s6" span={4} innerClassName="about__shot">
-          <PanelPhoto photo={about.hobbyPhoto} />
-          <span className="chip about__caption">{about.hobbyCaption}</span>
         </Panel>
 
         <div className="about__profile">
@@ -70,6 +58,19 @@ export function About() {
           </dl>
         </div>
       </div>
+
+      {about.hobbyPhotos.length > 0 && (
+        <ul className="g12 gallery" aria-label="Photos">
+          {about.hobbyPhotos.map((photo, i) => (
+            <li key={photo.src} className="gallery__item" style={{ gridColumn: `span ${gallerySpan(about.hobbyPhotos.length)}` }}>
+              <Panel shape={GALLERY_SHAPES[i % GALLERY_SHAPES.length]!} pop="strong" innerClassName="gallery__photo">
+                <PanelPhoto photo={photo} />
+                {photo.caption && <span className="chip gallery__caption">{photo.caption}</span>}
+              </Panel>
+            </li>
+          ))}
+        </ul>
+      )}
 
       <div className="music" aria-labelledby="music-title">
         <div className="music__head">
