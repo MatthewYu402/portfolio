@@ -10,6 +10,7 @@ import headshot from './assets/images/website-headshot.jpg';
 import naraDeer from './assets/images/about-me-photo.webp';
 import graduation from './assets/images/graduation-photo.webp';
 import phoebeBridgersConcert from './assets/images/phoebe-bridgers-concert.webp';
+import taiwanNightMarket from './assets/images/taiwain-nm.webp';
 
 
 export interface Photo {
@@ -190,10 +191,10 @@ export const skills: SkillGroup[] = [
 
 export const about = {
   portrait: {
-    src: headshot,
+    src: taiwanNightMarket,
     alt: 'Portrait of Matthew Yu',
-    width: 3264,
-    height: 2448,
+    width: 3024,
+    height: 4032,
     focus: '50% 0%',
 
   } satisfies Photo,
