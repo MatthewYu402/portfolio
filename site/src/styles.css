@@ -428,11 +428,11 @@ a:hover {
 .hero__caption-col {
   position: relative;
   z-index: 1;
-  grid-column: 6 / -1;
+  grid-column: 1 / span 5;
   grid-row: 2;
-  /* Pull the caption up so it overlaps the bottom of the name panel (row gap included). */
+  /* Pull the caption up so it overlaps the bottom of the hero photo (row gap included). */
   margin-top: -98px;
-  padding-left: 48px;
+  padding-left: 32px;
 }
 
 .hero__photo {
@@ -646,6 +646,12 @@ a:hover {
   font-size: 13px;
   letter-spacing: 0.08em;
   color: var(--muted);
+}
+
+.project__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
 }
 
 .project__link {

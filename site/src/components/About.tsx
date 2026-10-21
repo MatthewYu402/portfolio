@@ -63,7 +63,7 @@ export function About() {
         <ul className="g12 gallery" aria-label="Photos">
           {about.hobbyPhotos.map((photo, i) => (
             <li key={photo.src} className="gallery__item" style={{ gridColumn: `span ${gallerySpan(about.hobbyPhotos.length)}` }}>
-              <Panel shape={GALLERY_SHAPES[i % GALLERY_SHAPES.length]!} innerClassName="gallery__photo">
+              <Panel shape={GALLERY_SHAPES[i % GALLERY_SHAPES.length]!} pop="strong" innerClassName="gallery__photo">
                 <PanelPhoto photo={photo} />
                 {photo.caption && <span className="chip gallery__caption">{photo.caption}</span>}
               </Panel>

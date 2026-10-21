@@ -7,8 +7,8 @@ interface HeroProps {
   replayRef: Ref<HTMLButtonElement>;
 }
 
-// Desktop: photo on the left, name panel on the right with the caption under it.
-// Mobile (one column): name, caption, then photo — so the name stays above the fold.
+// Desktop: photo on the left with the caption box overlapping its bottom; name panel on the right.
+// Mobile (one column): name, photo, then the caption overlapping the photo.
 export function Hero({ onReplayIntro, replayRef }: HeroProps) {
   return (
     <section id="hero" className="section hero" aria-labelledby="hero-title">
@@ -23,6 +23,24 @@ export function Hero({ onReplayIntro, replayRef }: HeroProps) {
               </span>
             ))}
           </h1>
+        </Panel>
+
+        <Panel shape="s2" className="hero__photo-panel" innerClassName="hero__photo">
+          {hero.photo ? (
+            <img
+              className="photo"
+              src={hero.photo.src}
+              alt={hero.photo.alt}
+              width={hero.photo.width}
+              height={hero.photo.height}
+              style={{ objectPosition: hero.photo.focus }}
+            />
+          ) : (
+            <>
+              <div className="tone-fade hero__photo-tone" aria-hidden="true" />
+              <span className="chip">TODO — HERO PHOTO</span>
+            </>
+          )}
         </Panel>
 
         <div className="hero__caption-col">
@@ -45,24 +63,6 @@ export function Hero({ onReplayIntro, replayRef }: HeroProps) {
             Replay intro
           </button>
         </div>
-
-        <Panel shape="s2" className="hero__photo-panel" innerClassName="hero__photo">
-          {hero.photo ? (
-            <img
-              className="photo"
-              src={hero.photo.src}
-              alt={hero.photo.alt}
-              width={hero.photo.width}
-              height={hero.photo.height}
-              style={{ objectPosition: hero.photo.focus }}
-            />
-          ) : (
-            <>
-              <div className="tone-fade hero__photo-tone" aria-hidden="true" />
-              <span className="chip">TODO — HERO PHOTO</span>
-            </>
-          )}
-        </Panel>
       </div>
     </section>
   );

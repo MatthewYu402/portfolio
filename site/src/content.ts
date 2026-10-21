@@ -37,8 +37,10 @@ export interface Project {
   year?: string;
   description: string;
   stack: string[];
-  /** Link to a case study, repo or live demo. Leave empty to hide the "View case" link. */
+  /** Link to a case study or live demo. Leave empty to hide the "View case" link. */
   href?: string;
+  /** GitHub repository URL. Leave empty to hide the "GitHub repo" link. */
+  repo?: string;
   screenshot?: Photo;
   /** Renders the project as the "NEXT!" panel for work that's still in progress. */
   inProgress?: boolean;
@@ -87,9 +89,14 @@ export const site = {
 export const hero = {
   kicker: 'Chapter 00 — Portfolio',
   /** TODO: add your hero photo here (shown to the left of your name). Until then a placeholder panel is shown. */
-  photo: undefined as Photo | undefined,
+  photo: {
+    src: headshot,
+    alt: 'website-headshot-in-wisconsin',
+    width: 800,
+    height: 800,
+  } as Photo,
   caption:
-    'Software Engineer. Based in Phoenix, MD. Looking for full time opportunities and open for relocation. I love to learn and build things that matter. Currently interested in backend development, building complex systems with simple implementation.',
+    'Software Engineer, based in Phoenix, MD. Looking for full time opportunities and open for relocation. I love to learn and build things that matter. Currently interested in backend development, building complex systems with simple implementation.',
 };
 
 export const projects: Project[] = [
@@ -98,18 +105,22 @@ export const projects: Project[] = [
     year: 'work in progress',
     description: 'Designing a visualizer that takes an unmodified LeetCode `Solution` class, lets users step though an example line by line, and draws arrays, hash maps, linked lists, trees, and graphs as they change, to build intuition and debig solutions.',
     stack: ['React', 'TypeScript', 'JSON Schema'],
+    repo: 'https://github.com/MatthewYu402/LeetCode-Visualizer',
     inProgress: true,
   },
   {
     title: 'Spotify KPI Dashboard',
     description: 'A full-stack analytics dashboard that turns your personal Spotify Extended Streaming History into interactive highlights. It surfaces listening trends, top artists and tracks, average session length, discovery ratio, skip rates, and genre breakdowns, all filterable by week, month, year, or custom date range.',
     stack: [],
+    repo: 'https://github.com/MatthewYu402/spotify-kpi-dashboard',
     inProgress: true,
   },
   {
     title: 'CHIP-8 Emulator',
     description: 'Developing a fully functional virtual machine interpreter for the CHIP-8 architecture from scratch. This project serves to be a deep dive into C++ object oriented design and low-level computer systems.',
     stack: [],
+    // TODO: no CHIP-8 repo on GitHub yet — add its URL here to show the link.
+    repo: '',
     inProgress: true,
   },
 ];
@@ -184,6 +195,7 @@ export const about = {
     width: 3264,
     height: 2448,
     focus: '50% 0%',
+
   } satisfies Photo,
   /** Shown in a row under the profile. Add as many as you like; 4 fit one row on desktop. */
   hobbyPhotos: [
@@ -199,17 +211,21 @@ export const about = {
       alt: 'Graduation photo',
       width: 3024,
       height: 4032,
+      caption: 'Graduation',
     },
     {
       src: phoebeBridgersConcert,
       alt: 'Phoebe Bridgers concert',
       width: 4284,
       height: 5712,
+      caption: 'Phoebe Bridgers in NYC',
     },
   ] satisfies CaptionedPhoto[],
   quote: 'I love to learn and build things that matter.',
   bio: [
-    "I enjoy reading books and manga, watching movies, running, listening to new music, baking, and eating good food. Recently has been a lot of Catan.",
+    "I enjoy reading books and manga, watching movies, running, listening to new music, baking, and eating good food. Recently it has been a lot of Catan.",
+    "Learning is an endless process and I believe in sharing knowledge to those who wish to find it. Knowledge is power and knowledge is growth, so never stop learning.",
+    "I enjoy building and iterating though an architecture, looking at the reason for design choices and tradeoffs that come with it.",
   ],
   stats: [
     { label: 'Class', value: 'Software Engineer' },
