@@ -21,7 +21,6 @@
   line-height: normal;
   letter-spacing: normal;
   text-align: left;
-  cursor: pointer;
   opacity: 1;
   transition: opacity var(--exit-ms, 1500ms) ease-out;
 }

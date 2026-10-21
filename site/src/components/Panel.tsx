@@ -17,8 +17,6 @@ interface PanelProps {
   className?: string;
   innerClassName?: string;
   innerStyle?: CSSProperties;
-  /** Lets a panel with no links inside still be reached (and popped) by keyboard. */
-  focusable?: boolean;
   labelledBy?: string;
 }
 
@@ -36,7 +34,6 @@ export function Panel({
   className,
   innerClassName,
   innerStyle,
-  focusable = false,
   labelledBy,
 }: PanelProps) {
   const style: CSSProperties = {};
@@ -46,7 +43,7 @@ export function Panel({
   const classes = ['panel', pop && `panel--pop panel--${pop}`, className].filter(Boolean).join(' ');
 
   return (
-    <Tag className={classes} style={style} tabIndex={focusable ? 0 : undefined} aria-labelledby={labelledBy}>
+    <Tag className={classes} style={style} aria-labelledby={labelledBy}>
       {pop && <span className={`panel__pop ${shape}`} aria-hidden="true" />}
       <div className={`panel__frame ${shape}`}>
         <div className={['panel__inner', shape, innerClassName].filter(Boolean).join(' ')} style={innerStyle}>

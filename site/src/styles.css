@@ -233,27 +233,17 @@ a:hover {
   background-size: 8px 8px;
 }
 
-.panel--pop:focus-visible,
-.panel--pop:focus-within {
+/* Experience (strong) pops on hover only. Projects (subtle) also pop while a link
+   inside has keyboard focus — :focus-visible, so a mouse click doesn't leave it popped. */
+.panel--subtle:has(:focus-visible) {
   z-index: 2;
 }
 
-.panel--strong:focus-visible .panel__frame,
-.panel--strong:focus-within .panel__frame {
-  transform: scale(1.03);
-}
-
-.panel--strong:focus-visible .panel__pop,
-.panel--strong:focus-within .panel__pop {
-  opacity: 1;
-  transform: translate(6px, 6px) scale(1.03);
-}
-
-.panel--subtle:focus-within .panel__frame {
+.panel--subtle:has(:focus-visible) .panel__frame {
   transform: scale(1.015);
 }
 
-.panel--subtle:focus-within .panel__pop {
+.panel--subtle:has(:focus-visible) .panel__pop {
   opacity: 0.55;
   transform: translate(6px, 6px) scale(1.015);
 }
@@ -425,6 +415,41 @@ a:hover {
   padding-top: 40px;
 }
 
+.hero__name-panel {
+  grid-column: 6 / -1;
+  grid-row: 1;
+}
+
+.hero__photo-panel {
+  grid-column: 1 / span 5;
+  grid-row: 1;
+}
+
+.hero__caption-col {
+  position: relative;
+  z-index: 1;
+  grid-column: 6 / -1;
+  grid-row: 2;
+  /* Pull the caption up so it overlaps the bottom of the name panel (row gap included). */
+  margin-top: -98px;
+  padding-left: 48px;
+}
+
+.hero__photo {
+  min-height: 560px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero__photo-tone {
+  position: absolute;
+  inset: 0;
+  opacity: 0.4;
+}
+
 .hero__main {
   /* Lets the name size itself to the panel (cqi) so it never overflows. */
   container-type: inline-size;
@@ -468,33 +493,10 @@ a:hover {
   display: block;
 }
 
-.hero__side {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.hero__side-tone {
-  position: absolute;
-  inset: 0;
-  opacity: 0.4;
-}
-
-.hero__side-text {
-  position: relative;
-  writing-mode: vertical-rl;
-  font-size: 84px;
-  line-height: 1;
-  letter-spacing: 0.04em;
-}
-
 .caption-box {
   position: relative;
   z-index: 1;
   max-width: 540px;
-  margin: -84px 0 0 48px;
   padding: 22px 26px;
   display: flex;
   flex-direction: column;
@@ -520,7 +522,7 @@ a:hover {
   align-items: center;
   gap: 8px;
   min-height: 44px;
-  margin: 10px 0 0 48px;
+  margin: 10px 0 0;
   padding: 0 6px;
   border: 0;
   background: none;
@@ -810,7 +812,7 @@ a:hover {
 }
 
 .skills .row-label {
-  padding-top: 10px;
+  padding-top: 8px;
 }
 
 .skills__list {
@@ -821,8 +823,8 @@ a:hover {
   padding: 0;
   list-style: none;
   font-weight: 700;
-  font-size: 42px;
-  line-height: 1.15;
+  font-size: 28px;
+  line-height: 1.3;
 }
 
 .slash {
@@ -844,32 +846,32 @@ a:hover {
   object-fit: cover;
 }
 
-.photo-tone {
-  position: absolute;
-  inset: 0;
-  opacity: 0.12;
-  mix-blend-mode: multiply;
-  pointer-events: none;
+.gallery {
+  margin: 40px 0 0;
+  padding: 0;
+  list-style: none;
 }
 
-.about__shot {
-  min-height: 270px;
+.gallery__item {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+}
+
+.gallery__item > .panel {
+  flex: 1;
+}
+
+.gallery__photo {
+  aspect-ratio: 3 / 4;
   overflow: hidden;
 }
 
-.about__shot-tone {
+.gallery__caption {
   position: absolute;
-  inset: 0;
-  opacity: 0.5;
-}
-
-.about__caption {
-  position: absolute;
-  left: 14px;
-  bottom: 18px;
+  left: 12px;
+  bottom: 16px;
+  right: 12px;
+  width: fit-content;
 }
 
 .about__profile {
@@ -1218,7 +1220,6 @@ a:hover {
   }
 
   .caption-box {
-    margin: -56px 0 0 12px;
     padding: 18px 18px;
   }
 
@@ -1226,8 +1227,13 @@ a:hover {
     font-size: 17px;
   }
 
-  .replay {
-    margin-left: 12px;
+  .hero__caption-col {
+    margin-top: -56px;
+    padding-left: 12px;
+  }
+
+  .hero__photo {
+    min-height: 420px;
   }
 
   .project--a,
@@ -1251,7 +1257,7 @@ a:hover {
   }
 
   .skills__list {
-    font-size: 30px;
+    font-size: 22px;
   }
 
   .skills .row-label {
@@ -1335,8 +1341,7 @@ a:hover {
   }
 
   .panel--pop:hover .panel__pop,
-  .panel--pop:focus-visible .panel__pop,
-  .panel--pop:focus-within .panel__pop {
+  .panel--subtle:has(:focus-visible) .panel__pop {
     transform: translate(6px, 6px) !important;
   }
 }

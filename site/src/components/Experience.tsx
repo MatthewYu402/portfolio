@@ -2,7 +2,10 @@ import { education, experience } from '../content';
 import { Panel, type PanelShape } from './Panel';
 import { SectionHeader } from './SectionHeader';
 
-const SHAPES: PanelShape[] = ['s4', 's5', 's4'];
+const SHAPES: PanelShape[] = ['s4', 's5'];
+
+// Three jobs sit in one row; four (or more) go two per row so no panel is left on its own.
+const spanFor = (count: number) => (count === 3 ? 4 : count === 1 ? 12 : 6);
 
 export function Experience() {
   return (
@@ -12,18 +15,18 @@ export function Experience() {
       <div className="g12">
         {experience.map((job, i) => {
           const titleId = `job-${i}-title`;
+          const shape = SHAPES[i % SHAPES.length]!;
           return (
             <Panel
               key={titleId}
               as="article"
-              shape={SHAPES[i % SHAPES.length]!}
-              span={4}
+              shape={shape}
+              span={spanFor(experience.length)}
               pop="strong"
-              focusable
               labelledBy={titleId}
-              innerClassName={`job job--${i % 2 === 1 ? 'right' : 'left'}`}
+              innerClassName={`job job--${shape === 's5' ? 'right' : 'left'}`}
             >
-              {i === 2 && <div className="tone-fade job__tone" aria-hidden="true" />}
+              {i === experience.length - 1 && <div className="tone-fade job__tone" aria-hidden="true" />}
               <span className="job__dates">{job.dates}</span>
               <h3 id={titleId} className="job__role">
                 {job.role}

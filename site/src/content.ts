@@ -6,8 +6,11 @@
  * contact pages). Anything marked TODO didn't exist on the old site — replace it
  * with your own text. Search this file for "TODO" to find them all.
  */
-import headshot from './assets/images/Website Headshot.webp';
+import headshot from './assets/images/website-headshot.jpg';
 import naraDeer from './assets/images/about-me-photo.webp';
+import graduation from './assets/images/graduation-photo.webp';
+import phoebeBridgersConcert from './assets/images/phoebe-bridgers-concert.webp';
+
 
 export interface Photo {
   src: string;
@@ -17,6 +20,11 @@ export interface Photo {
   height: number;
   /** CSS object-position, for photos cropped into a different panel shape. */
   focus?: string;
+}
+
+export interface CaptionedPhoto extends Photo {
+  /** Optional label shown on the photo. */
+  caption?: string;
 }
 
 export interface Link {
@@ -72,43 +80,69 @@ export const site = {
   name: 'Matthew Yu',
   /** The hero splits the name over two lines. */
   nameLines: ['MATTHEW', 'YU'],
-  email: 'myu242@wisc.edu',
-  copyrightYear: '2025',
+  email: 'myu22826@gmail.com',
+  copyrightYear: '2026',
 };
 
 export const hero = {
   kicker: 'Chapter 00 — Portfolio',
+  /** TODO: add your hero photo here (shown to the left of your name). Until then a placeholder panel is shown. */
+  photo: undefined as Photo | undefined,
   caption:
-    'I am a Senior at the University of Wisconsin-Madison pursuing a Bachelors in Computer Science and Data Science. I love finding creative solutions to complex problems and turning data into meaningful insights.',
+    'Software Engineer. Based in Phoenix, MD. Looking for full time opportunities and open for relocation. I love to learn and build things that matter. Currently interested in backend development, building complex systems with simple implementation.',
 };
 
 export const projects: Project[] = [
   {
-    title: 'TODO: Project title',
-    year: 'TODO: Year',
-    description: 'TODO: One sentence — what it does and why it matters.',
-    stack: ['TODO: Stack', 'TODO: Stack', 'TODO: Stack'],
+    title: 'LeetCode Visualizer',
+    year: 'work in progress',
+    description: 'Designing a visualizer that takes an unmodified LeetCode `Solution` class, lets users step though an example line by line, and draws arrays, hash maps, linked lists, trees, and graphs as they change, to build intuition and debig solutions.',
+    stack: ['React', 'TypeScript', 'JSON Schema'],
+    inProgress: true,
   },
   {
-    title: 'TODO: Project title',
-    year: 'TODO: Year',
-    description: 'TODO: One sentence — what it does and why it matters.',
-    stack: ['TODO: Stack', 'TODO: Stack'],
-  },
-  {
-    title: 'TODO: Project title',
-    description: 'TODO: One sentence — what it does and why it matters.',
+    title: 'Spotify KPI Dashboard',
+    description: 'A full-stack analytics dashboard that turns your personal Spotify Extended Streaming History into interactive highlights. It surfaces listening trends, top artists and tracks, average session length, discovery ratio, skip rates, and genre breakdowns, all filterable by week, month, year, or custom date range.',
     stack: [],
+    inProgress: true,
   },
   {
-    title: 'TODO: Project in progress',
-    description: 'TODO: What you are building right now.',
+    title: 'CHIP-8 Emulator',
+    description: 'Developing a fully functional virtual machine interpreter for the CHIP-8 architecture from scratch. This project serves to be a deep dive into C++ object oriented design and low-level computer systems.',
     stack: [],
     inProgress: true,
   },
 ];
 
 export const experience: Job[] = [
+  {
+    dates: 'January 2026 – June 2026',
+    role: 'Software Engineering Intern',
+    company: 'WEM Automation - A Valstone Company',
+    highlights: [
+      'Architected a full-stack manufacturing analytics platform (React, TypeScript, ASP.NET Core, SQL Server), giving plant managers real - time KPI visibility across 200 + daily production batches.',
+      'Designed backend data architecture, REST APIs, and a dedicated SQL aggregation layer that turn raw operational data into query - efficient time - series KPIs for responsive dashboards.',
+    ],
+  },
+  {
+    dates: 'Summer 2026',
+    role: 'Web Developer',
+    company: 'Green Leaf Restaurant',
+    highlights: [
+      'Built and deployed a responsive React/TypeScript restaurant website from scratch, developing reusable components for 100+ menu items, image galleries, accordions, and mobile navigation across multiple pages.',
+      'Designed and implemented a GitHub Actions CI/CD pipeline with automated pull-request build validation and deployments to staging and production environments.',
+    ],
+  },
+  {
+    dates: 'Fall 2025',
+    role: 'Student Software Engineer',
+    company: 'Rosenberg Lab',
+    highlights: [
+      'Built a Python/Kivy application with Pupil Labs eye-tracking integration to identify autism subgroups based on contextual learning vs. visual saliency patterns, enabling personalized therapeutics.',
+      'Implemented real-time behavioral data collection on SQLite with a multi-threaded architecture, synchronizing response times, accuracy, and gaze data across 250 + trials.',
+      'Collaborated with UW-Madison neuroscience researchers on a 5-person cross-functional Agile/Scrum team using Jira, Figma, Slack, and Git',
+    ],
+  },
   {
     dates: 'May 2024 – November 2024',
     role: 'Circulation/Collections Assistant',
@@ -119,26 +153,6 @@ export const experience: Job[] = [
       'Organized and shelved books by call number with meticulous attention to detail, maintaining order and accessibility.',
     ],
   },
-  {
-    dates: '2018 – 2022',
-    role: 'Host',
-    company: 'Green Leaf Restaurant',
-    highlights: [
-      'Expertly managed front-of-house operations by warmly welcoming and seating guests in a friendly and timely manner.',
-      'Exhibited a keen attention to detail in managing reservations, accurately tracking availability of tables to customers.',
-      'Maintained a courteous and professional demeanor with customers, ensuring a positive and welcoming atmosphere.',
-    ],
-  },
-  {
-    dates: '2018 – 2022',
-    role: 'Cashier',
-    company: 'Green Leaf Restaurant',
-    highlights: [
-      'Efficiently managed and organized takeout orders, ensuring timely preparation for customers picking up orders.',
-      'Effectively processed customer purchases, ensuring the accurate and structured operation of the point-of-sale system.',
-      'Provided friendly and courteous service to customers, addressing inquiries, and resolving issues to ensure satisfaction.',
-    ],
-  },
 ];
 
 export const education: School[] = [
@@ -147,7 +161,7 @@ export const education: School[] = [
     school: 'University of Wisconsin-Madison',
     dates: '2022 – 2026',
     description:
-      'Pursuing dual degree in Computer Science and Data Science, focusing on machine learning and software engineering.',
+      'Graduated with a double major in Computer Science and Data Science',
   },
   {
     degree: 'High School',
@@ -158,9 +172,9 @@ export const education: School[] = [
 ];
 
 export const skills: SkillGroup[] = [
-  { label: 'Backend', skills: ['Java', 'Python'] },
-  { label: 'Frontend', skills: ['HTML', 'CSS', 'JavaScript'] },
-  { label: 'Other Tools', skills: ['Git', 'Bash'] },
+  { label: 'Backend', skills: ['C#', 'C++', 'Java', 'Python', 'ASP.NET Core', 'Django', 'REST APIs', 'SQL Server', 'SQLite', 'PostgreSQL'] },
+  { label: 'Frontend', skills: ['React', 'TypeScript', 'JavaScript', 'Next.js', 'HTML', 'CSS', ] },
+  { label: 'Other Tools', skills: ['Git', 'Bash', 'Docker', 'Linux', 'GitHub Actions'] },
 ];
 
 export const about = {
@@ -169,28 +183,39 @@ export const about = {
     alt: 'Portrait of Matthew Yu',
     width: 3264,
     height: 2448,
-    focus: '50% 30%',
+    focus: '50% 0%',
   } satisfies Photo,
-  /** TODO: no "at work" photo existed on the old site. Add one here to replace the placeholder. */
-  workPhoto: undefined as Photo | undefined,
-  hobbyPhoto: {
-    src: naraDeer,
-    alt: 'Sika deer in Nara Park, Japan',
-    width: 4032,
-    height: 3024,
-  } satisfies Photo,
-  hobbyCaption: 'Sika Deer in Nara Park, Japan',
-  quote: 'TODO: One impactful sentence about what you love to do.',
+  /** Shown in a row under the profile. Add as many as you like; 4 fit one row on desktop. */
+  hobbyPhotos: [
+    {
+      src: naraDeer,
+      alt: 'Sika deer in Nara Park, Japan',
+      width: 4032,
+      height: 3024,
+      caption: 'Sika Deer in Nara Park, Japan',
+    },
+    {
+      src: graduation,
+      alt: 'Graduation photo',
+      width: 3024,
+      height: 4032,
+    },
+    {
+      src: phoebeBridgersConcert,
+      alt: 'Phoebe Bridgers concert',
+      width: 4284,
+      height: 5712,
+    },
+  ] satisfies CaptionedPhoto[],
+  quote: 'I love to learn and build things that matter.',
   bio: [
-    "Hi, I'm Matthew! I am a Senior at the University of Wisconsin-Madison studying Computer Science and Data Science. I'm particularly interested in full-stack web development and machine learning applications.",
-    "Other than programming, I enjoy discovering new music and playing it on my radio show on WSUM 91.7. On top of that, I'm trying to learn new instruments like the guitar and harmonica.",
-    "I also love to cook and bake new recipes. I'm eager to travel more to experience new cultures and cuisines, keeping an open mind wherever I go.",
+    "I enjoy reading books and manga, watching movies, running, listening to new music, baking, and eating good food. Recently has been a lot of Catan.",
   ],
   stats: [
-    { label: 'Class', value: 'CS & Data Science Student' },
-    { label: 'Base', value: 'Madison, Wisconsin' },
-    { label: 'Special move', value: 'TODO: Your signature strength' },
-    { label: 'Off-duty', value: 'Radio show on WSUM 91.7' },
+    { label: 'Class', value: 'Software Engineer' },
+    { label: 'Base', value: 'Phoenix, MD' },
+    { label: 'Special move', value: 'Sleep' },
+    { label: 'Off-duty', value: 'Mixing music' },
   ] satisfies Stat[],
 };
 
@@ -222,9 +247,7 @@ export const contact = {
   links: [
     { label: 'GitHub', href: 'https://github.com/MatthewYu402' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/matthew-yu-37b860222/' },
-    { label: 'Résumé', href: `${base}${encodeURI('Yu Matthew Resume.pdf')}` },
-    { label: 'Instagram', href: 'https://www.instagram.com/_matthew_yu_/' },
-    { label: 'Spotify', href: 'https://open.spotify.com/user/matthewyu402' },
+    { label: 'Résumé', href: `${base}${encodeURI('resume-10-20-26.pdf')}` },
   ] satisfies Link[],
 };
 
