@@ -104,7 +104,7 @@ export const projects: Project[] = [
   {
     title: 'LeetCode Visualizer',
     year: 'work in progress',
-    description: 'Designing a visualizer that takes an unmodified LeetCode `Solution` class, lets users step though an example line by line, and draws arrays, hash maps, linked lists, trees, and graphs as they change, to build intuition and debig solutions.',
+    description: 'Designing a visualizer that takes an unmodified LeetCode `Solution` class, lets users step through an example line by line, and draws arrays, hash maps, linked lists, trees, and graphs as they change, to build intuition and debug solutions.',
     stack: ['React', 'TypeScript', 'JSON Schema'],
     repo: 'https://github.com/MatthewYu402/LeetCode-Visualizer',
     inProgress: true,
@@ -132,8 +132,8 @@ export const experience: Job[] = [
     role: 'Software Engineering Intern',
     company: 'WEM Automation - A Valstone Company',
     highlights: [
-      'Architected a full-stack manufacturing analytics platform (React, TypeScript, ASP.NET Core, SQL Server), giving plant managers real - time KPI visibility across 200 + daily production batches.',
-      'Designed backend data architecture, REST APIs, and a dedicated SQL aggregation layer that turn raw operational data into query - efficient time - series KPIs for responsive dashboards.',
+      'Architected a full-stack manufacturing analytics platform (React, TypeScript, ASP.NET Core, SQL Server), giving plant managers real-time KPI visibility across 200+ daily production batches.',
+      'Designed backend data architecture, REST APIs, and a dedicated SQL aggregation layer that turn raw operational data into query-efficient time-series KPIs for responsive dashboards.',
     ],
   },
   {
@@ -151,7 +151,7 @@ export const experience: Job[] = [
     company: 'Rosenberg Lab',
     highlights: [
       'Built a Python/Kivy application with Pupil Labs eye-tracking integration to identify autism subgroups based on contextual learning vs. visual saliency patterns, enabling personalized therapeutics.',
-      'Implemented real-time behavioral data collection on SQLite with a multi-threaded architecture, synchronizing response times, accuracy, and gaze data across 250 + trials.',
+      'Implemented real-time behavioral data collection on SQLite with a multi-threaded architecture, synchronizing response times, accuracy, and gaze data across 250+ trials.',
       'Collaborated with UW-Madison neuroscience researchers on a 5-person cross-functional Agile/Scrum team using Jira, Figma, Slack, and Git',
     ],
   },
@@ -225,8 +225,8 @@ export const about = {
   quote: 'I love to learn and build things that matter.',
   bio: [
     "I enjoy reading books and manga, watching movies, running, listening to new music, baking, and eating good food. Recently it has been a lot of Catan.",
-    "Learning is an endless process and I believe in sharing knowledge to those who wish to find it. Knowledge is power and knowledge is growth, so never stop learning.",
-    "I enjoy building and iterating though an architecture, looking at the reason for design choices and tradeoffs that come with it.",
+    "Learning is an endless process and I believe in sharing knowledge with those who wish to find it. Knowledge is power and knowledge is growth, so never stop learning.",
+    "I enjoy building and iterating through an architecture, looking at the reason for design choices and tradeoffs that come with it.",
   ],
   stats: [
     { label: 'Class', value: 'Software Engineer' },
@@ -238,7 +238,7 @@ export const about = {
 
 export const music = {
   title: 'Current Rotation',
-  description: "Recent music I've been listening too - mix of personal favorites and new discoveries",
+  description: "Recent music I've been listening to - mix of personal favorites and new discoveries",
   embedSrc: 'https://open.spotify.com/embed/playlist/7JIwJ4T18s3ebiv7qQjZDv?utm_source=generator',
   href: 'https://open.spotify.com/playlist/7JIwJ4T18s3ebiv7qQjZDv?si=0e067e8047934813',
   playlists: [
