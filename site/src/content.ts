@@ -11,6 +11,7 @@ import naraDeer from './assets/images/about-me-photo.webp';
 import graduation from './assets/images/graduation-photo.webp';
 import phoebeBridgersConcert from './assets/images/phoebe-bridgers-concert.webp';
 import taiwanNightMarket from './assets/images/taiwain-nm.webp';
+import chip8 from './assets/images/chip-8.jpg';
 
 
 export interface Photo {
@@ -112,17 +113,23 @@ export const projects: Project[] = [
   {
     title: 'Spotify KPI Dashboard',
     description: 'A full-stack analytics dashboard that turns your personal Spotify Extended Streaming History into interactive highlights. It surfaces listening trends, top artists and tracks, average session length, discovery ratio, skip rates, and genre breakdowns, all filterable by week, month, year, or custom date range.',
-    stack: [],
+    stack: ['Python', 'Django', 'Typescript', 'React', 'PostgreSQL'],
     repo: 'https://github.com/MatthewYu402/spotify-kpi-dashboard',
     inProgress: true,
   },
   {
     title: 'CHIP-8 Emulator',
+    screenshot: {
+      src: chip8,
+      alt: 'CHIP-8 emulator with text',
+      width: 957,
+      height: 475,
+    },
     description: 'Developing a fully functional virtual machine interpreter for the CHIP-8 architecture from scratch. This project serves to be a deep dive into C++ object oriented design and low-level computer systems.',
-    stack: [],
+    stack: ['C++20', 'SDL2', 'Make'],
     // TODO: no CHIP-8 repo on GitHub yet — add its URL here to show the link.
-    repo: '',
-    inProgress: true,
+    repo: 'https://github.com/MatthewYu402/CHIP-8',
+    inProgress: false,
   },
 ];
 
