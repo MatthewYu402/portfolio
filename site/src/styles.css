@@ -746,6 +746,13 @@ a:hover {
   color: var(--accent);
 }
 
+.job__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  margin-top: auto;
+}
+
 .row {
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr);

@@ -69,8 +69,8 @@ export function App() {
         <Navbar />
         <main>
           <Hero onReplayIntro={replayIntro} replayRef={replayRef} />
-          <Projects />
           <Experience />
+          <Projects />
           <Skills />
           <About />
           <Contact />

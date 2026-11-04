@@ -10,7 +10,7 @@ const spanFor = (count: number) => (count === 3 ? 4 : count === 1 ? 12 : 6);
 export function Experience() {
   return (
     <section id="experience" className="section" aria-labelledby="experience-title">
-      <SectionHeader number="02" title="EXPERIENCE" id="experience-title" />
+      <SectionHeader number="01" title="EXPERIENCE" id="experience-title" />
 
       <div className="g12">
         {experience.map((job, i) => {
@@ -37,6 +37,14 @@ export function Experience() {
                   <li key={h}>{h}</li>
                 ))}
               </ul>
+              {job.href && (
+                <div className="job__links">
+                  <a className="project__link" href={job.href} target="_blank" rel="noopener noreferrer">
+                    Visit site <span aria-hidden="true">↗</span>
+                    <span className="sr-only"> for {job.company} (opens in a new tab)</span>
+                  </a>
+                </div>
+              )}
             </Panel>
           );
         })}
