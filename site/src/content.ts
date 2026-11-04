@@ -274,7 +274,7 @@ export const contact = {
   links: [
     { label: 'GitHub', href: 'https://github.com/MatthewYu402' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/matthew-yu-37b860222/' },
-    { label: 'Résumé', href: `${base}${encodeURI('resume-10-20-26.pdf')}` },
+    { label: 'Résumé', href: `${base}${encodeURI('resume-11-4-26.pdf')}` },
   ] satisfies Link[],
 };
 
