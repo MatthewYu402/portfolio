@@ -109,7 +109,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 export function Projects() {
   return (
     <section id="projects" className="section" aria-labelledby="projects-title">
-      <SectionHeader number="01" title="PROJECTS" id="projects-title" />
+      <SectionHeader number="02" title="PROJECTS" id="projects-title" />
       <div className="g12">
         {projects.map((project, i) => (
           <ProjectCard key={i} project={project} index={i} />

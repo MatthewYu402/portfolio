@@ -53,6 +53,8 @@ export interface Job {
   role: string;
   company: string;
   highlights: string[];
+  /** Company website. Leave empty to hide the "Visit site" link. */
+  href?: string;
 }
 
 export interface School {
@@ -147,6 +149,7 @@ export const experience: Job[] = [
     dates: 'Summer 2026',
     role: 'Web Developer',
     company: 'Green Leaf Restaurant',
+    href: 'https://greenleafcuisine.com',
     highlights: [
       'Built and deployed a responsive React/TypeScript restaurant website from scratch, developing reusable components for 100+ menu items, image galleries, accordions, and mobile navigation across multiple pages.',
       'Designed and implemented a GitHub Actions CI/CD pipeline with automated pull-request build validation and deployments to staging and production environments.',
@@ -271,13 +274,13 @@ export const contact = {
   links: [
     { label: 'GitHub', href: 'https://github.com/MatthewYu402' },
     { label: 'LinkedIn', href: 'https://www.linkedin.com/in/matthew-yu-37b860222/' },
-    { label: 'Résumé', href: `${base}${encodeURI('resume-10-20-26.pdf')}` },
+    { label: 'Résumé', href: `${base}${encodeURI('resume-11-4-26.pdf')}` },
   ] satisfies Link[],
 };
 
 export const navItems = [
-  { id: 'projects', label: 'Projects' },
   { id: 'experience', label: 'Experience' },
+  { id: 'projects', label: 'Projects' },
   { id: 'skills', label: 'Skills' },
   { id: 'about', label: 'About' },
   { id: 'contact', label: 'Contact' },
