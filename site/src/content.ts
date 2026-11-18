@@ -12,6 +12,7 @@ import graduation from './assets/images/graduation-photo.webp';
 import phoebeBridgersConcert from './assets/images/phoebe-bridgers-concert.webp';
 import taiwanNightMarket from './assets/images/taiwain-nm.webp';
 import chip8 from './assets/images/chip-8.jpg';
+import leetcodeTracker from './assets/images/lct1.webp';
 
 
 export interface Photo {
@@ -113,13 +114,6 @@ export const projects: Project[] = [
     inProgress: true,
   },
   {
-    title: 'Spotify KPI Dashboard',
-    description: 'A full-stack analytics dashboard that turns your personal Spotify Extended Streaming History into interactive highlights. It surfaces listening trends, top artists and tracks, average session length, discovery ratio, skip rates, and genre breakdowns, all filterable by week, month, year, or custom date range.',
-    stack: ['Python', 'Django', 'Typescript', 'React', 'PostgreSQL'],
-    repo: 'https://github.com/MatthewYu402/spotify-kpi-dashboard',
-    inProgress: true,
-  },
-  {
     title: 'CHIP-8 Emulator',
     screenshot: {
       src: chip8,
@@ -127,11 +121,30 @@ export const projects: Project[] = [
       width: 957,
       height: 475,
     },
-    description: 'Developing a fully functional virtual machine interpreter for the CHIP-8 architecture from scratch. This project serves to be a deep dive into C++ object oriented design and low-level computer systems.',
+    description: 'Developed a fully functional virtual machine interpreter for the CHIP-8 architecture from scratch. This project serves to be a deep dive into C++ object oriented design and low-level computer systems.',
     stack: ['C++20', 'SDL2', 'Make'],
-    // TODO: no CHIP-8 repo on GitHub yet — add its URL here to show the link.
     repo: 'https://github.com/MatthewYu402/CHIP-8',
     inProgress: false,
+  },
+  {
+    title: 'LeetCode Tracker',
+    screenshot: {
+      src: leetcodeTracker,
+      alt: 'LeetCode tracker home page with problems',
+      width: 1622,
+      height: 1283,
+    },
+    description: 'Built a full-stack study tracker for LeetCode problems that records how each problem was solved, why the approach works, and which patterns and data structures it uses. Developed with React, TypeScript, Express, and SQLite, it includes filtering by difficulty and pattern, Markdown notes with LaTeX math, code storage with syntax highlighting, PDF uploads for handwritten notes, and review tracking for spaced revisits.',
+    stack: ['React', 'TypeScript', 'Node.js', 'Express', 'SQLite', 'Drizzle ORM', 'Tailwind CSS', 'Vite'],
+    repo: 'https://github.com/MatthewYu402/LeetCode-Tracker',
+    inProgress: false,
+  },
+  {
+    title: 'Spotify KPI Dashboard',
+    description: 'A full-stack analytics dashboard that turns your personal Spotify Extended Streaming History into interactive highlights. It surfaces listening trends, top artists and tracks, average session length, discovery ratio, skip rates, and genre breakdowns, all filterable by week, month, year, or custom date range.',
+    stack: ['Python', 'Django', 'Typescript', 'React', 'PostgreSQL'],
+    repo: 'https://github.com/MatthewYu402/spotify-kpi-dashboard',
+    inProgress: true,
   },
 ];
 
