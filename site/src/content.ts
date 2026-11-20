@@ -13,6 +13,7 @@ import phoebeBridgersConcert from './assets/images/phoebe-bridgers-concert.webp'
 import taiwanNightMarket from './assets/images/taiwain-nm.webp';
 import chip8 from './assets/images/chip-8.jpg';
 import leetcodeTracker from './assets/images/lct1.webp';
+import visi from './assets/images/visi.webp';
 
 
 export interface Photo {
@@ -23,6 +24,13 @@ export interface Photo {
   height: number;
   /** CSS object-position, for photos cropped into a different panel shape. */
   focus?: string;
+  /**
+   * 'contain' shows the whole image instead of cropping it to fill the panel.
+   * Pair it with `backdrop` so any space around the image matches its edges.
+   */
+  fit?: 'cover' | 'contain';
+  /** Colour behind the image, seen around it when `fit` is 'contain'. */
+  backdrop?: string;
 }
 
 export interface CaptionedPhoto extends Photo {
@@ -42,6 +50,8 @@ export interface Project {
   stack: string[];
   /** Link to a case study or live demo. Leave empty to hide the "View case" link. */
   href?: string;
+  /** Text for the `href` link. Defaults to "View case". */
+  hrefLabel?: string;
   /** GitHub repository URL. Leave empty to hide the "GitHub repo" link. */
   repo?: string;
   screenshot?: Photo;
@@ -106,24 +116,19 @@ export const hero = {
 
 export const projects: Project[] = [
   {
-    title: 'LeetCode Visualizer',
-    year: 'work in progress',
-    description: 'Designing a visualizer that takes an unmodified LeetCode `Solution` class, lets users step through an example line by line, and draws arrays, hash maps, linked lists, trees, and graphs as they change, to build intuition and debug solutions.',
-    stack: ['React', 'TypeScript', 'JSON Schema'],
-    repo: 'https://github.com/MatthewYu402/LeetCode-Visualizer',
-    inProgress: true,
-  },
-  {
-    title: 'CHIP-8 Emulator',
+    title: 'Visi',
     screenshot: {
-      src: chip8,
-      alt: 'CHIP-8 emulator with text',
-      width: 957,
-      height: 475,
+      src: visi,
+      alt: 'Visi sandbox with a LeetCode Solution in the code editor and the visual canvas beside it',
+      width: 1720,
+      height: 956,
+      focus: '50% 0%',
     },
-    description: 'Developed a fully functional virtual machine interpreter for the CHIP-8 architecture from scratch. This project serves to be a deep dive into C++ object oriented design and low-level computer systems.',
-    stack: ['C++20', 'SDL2', 'Make'],
-    repo: 'https://github.com/MatthewYu402/CHIP-8',
+    description: 'A LeetCode visualizer: paste an unmodified LeetCode Solution in Python, Java, or C++, run it on an example, and step through it line by line while arrays, hash maps, stacks, linked lists, trees, graphs, and the recursion call stack are drawn as they change. Each language has its own tracing adapter (sys.settrace with an AST rewrite, a rewriter on the JDK\'s parser, and a Clang LibTooling rewriter with a header-only C++ runtime), all writing one language-neutral JSON trace that the React frontend renders. Untrusted code runs in a locked-down Docker container under gVisor, and every trace is validated against a JSON Schema before the browser sees it.',
+    stack: ['React', 'TypeScript', 'Vite', 'Framer Motion', 'Monaco', 'Python', 'FastAPI', 'Java', 'C++20', 'Clang LibTooling', 'Docker', 'gVisor', 'JSON Schema', 'GitHub Actions'],
+    href: 'https://visicode.dev',
+    hrefLabel: 'Live site',
+    repo: 'https://github.com/MatthewYu402/Visi',
     inProgress: false,
   },
   {
@@ -145,6 +150,22 @@ export const projects: Project[] = [
     stack: ['Python', 'Django', 'Typescript', 'React', 'PostgreSQL'],
     repo: 'https://github.com/MatthewYu402/spotify-kpi-dashboard',
     inProgress: true,
+  },
+  {
+    title: 'CHIP-8 Emulator',
+    screenshot: {
+      src: chip8,
+      alt: 'CHIP-8 emulator with text',
+      width: 957,
+      height: 475,
+      // The test ROM's text runs to the image's edges, so show it whole on a black screen.
+      fit: 'contain',
+      backdrop: '#000',
+    },
+    description: 'Developed a fully functional virtual machine interpreter for the CHIP-8 architecture from scratch. This project serves to be a deep dive into C++ object oriented design and low-level computer systems.',
+    stack: ['C++20', 'SDL2', 'Make'],
+    repo: 'https://github.com/MatthewYu402/CHIP-8',
+    inProgress: false,
   },
 ];
 

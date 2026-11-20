@@ -12,10 +12,17 @@ const SLOTS: { span: number; shape: PanelShape; variant: string }[] = [
 
 function Screenshot({ project }: { project: Project }) {
   if (project.screenshot) {
-    const { src, alt, width, height, focus } = project.screenshot;
+    const { src, alt, width, height, focus, fit, backdrop } = project.screenshot;
     return (
-      <div className="project__shot">
-        <img src={src} alt={alt} width={width} height={height} loading="lazy" style={{ objectPosition: focus }} />
+      <div className="project__shot" style={{ background: backdrop }}>
+        <img
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          loading="lazy"
+          style={{ objectPosition: focus, objectFit: fit }}
+        />
       </div>
     );
   }
@@ -95,8 +102,12 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           <div className="project__links">
             <RepoLink project={project} className="project__link" />
             {project.href && (
-              <a className="project__link" href={project.href}>
-                View case <span aria-hidden="true">→</span>
+              <a
+                className="project__link"
+                href={project.href}
+                {...(project.hrefLabel && { target: '_blank', rel: 'noopener noreferrer' })}
+              >
+                {project.hrefLabel ?? 'View case'} <span aria-hidden="true">{project.hrefLabel ? '↗' : '→'}</span>
               </a>
             )}
           </div>
