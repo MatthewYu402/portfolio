@@ -16,9 +16,9 @@ Software engineer based in Phoenix, MD, interested in backend development and bu
 ## Featured work
 
 - **[Green Leaf Restaurant](https://greenleafcuisine.com)** — responsive React/TypeScript restaurant site with 100+ menu items and a GitHub Actions CI/CD pipeline ([repo](https://github.com/MatthewYu402/green_leaf_restarant_website)).
-- **[LeetCode Visualizer](https://github.com/MatthewYu402/LeetCode-Visualizer)** — steps through an unmodified LeetCode `Solution` line by line and draws the data structures as they change.
+- **[Visi](https://visicode.dev)** — a LeetCode visualizer: steps through an unmodified `Solution` in Python, Java, or C++ line by line and draws the data structures as they change ([repo](https://github.com/MatthewYu402/Visi)).
 - **[Spotify KPI Dashboard](https://github.com/MatthewYu402/spotify-kpi-dashboard)** — full-stack analytics dashboard over your Spotify Extended Streaming History.
-- **CHIP-8 Emulator** — a CHIP-8 interpreter in C++ (in progress).
+- **[CHIP-8 Emulator](https://github.com/MatthewYu402/CHIP-8)** — a CHIP-8 interpreter in C++.
 
 ## About this site
 
